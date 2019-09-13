@@ -1,0 +1,39 @@
+{
+  "name": "TODO",
+  "description": "TODO",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "sapper dev",
+    "build": "sapper build --legacy",
+    "export": "sapper export --legacy",
+    "start": "node __sapper__/build",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test": "run-p --race dev cy:run"
+  },
+  "dependencies": {
+    "compression": "",
+    "contentful": "^7.9.1",
+    "json-complete": "^2.0.0",
+    "polka": "next",
+    "sirv": "",
+    "stripe": "^7.9.0"
+  },
+  "devDependencies": {
+    "npm-run-all": "",
+    "sapper": "",
+    "svelte": "",
+    "@babel/core": "",
+    "@babel/plugin-syntax-dynamic-import": "",
+    "@babel/plugin-transform-runtime": "",
+    "@babel/preset-env": "",
+    "@babel/runtime": "",
+    "rollup": "",
+    "rollup-plugin-babel": "",
+    "rollup-plugin-commonjs": "",
+    "rollup-plugin-node-resolve": "",
+    "rollup-plugin-replace": "",
+    "rollup-plugin-svelte": "",
+    "rollup-plugin-terser": ""
+  }
+}

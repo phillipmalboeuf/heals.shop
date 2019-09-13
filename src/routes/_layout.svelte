@@ -1,0 +1,133 @@
+<script>
+  import { fade } from 'svelte/transition'
+  import Header from '../components/Header.svelte'
+
+  import { stores } from '@sapper/app'
+	const { preloading } = stores()
+
+	export let segment
+</script>
+
+<style>
+	:global(*) {
+    box-sizing: border-box;
+  }
+
+	:global(:root) {
+    --rythm: 20px;
+		--gutter: 5vw;
+
+		--huge: 5vw;
+		--big: 32px;
+    --medium: 22px;
+    --small: 14px;
+    --body: 16px;
+
+		--black: #1D2135;
+		--navy: #3F5277;
+		--grey: #E9E3E8;
+  }
+
+	:global(html) {
+    background-color: var(--navy);
+  }
+
+	:global(body) {
+		font-family: "Inter", system-ui, -apple-system;
+    font-size: 20px;
+    line-height: 1.333;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+		color: var(--black);
+		background: var(--grey);
+
+		margin: 0;
+    overflow-x: hidden;
+	}
+
+	main {
+		padding: calc(var(--rythm) * 6) var(--gutter) calc(var(--rythm) * 2);
+	}
+
+	:global(h1, h2, h3, h4, h5, h6, p, figure) {
+		font-weight: normal;
+    margin: 0 0 var(--rythm);
+    /* white-space: pre-line; */
+  }
+
+	:global(h1, h4) {
+		font-family: 'Untitled Serif Test', 'Times New Roman', Times, serif
+	}
+
+	:global(h1) {
+    font-size: var(--huge);
+  }
+
+  :global(h2) {
+    font-size: var(--big);
+  }
+
+  :global(h4) {
+    font-size: var(--medium);
+  }
+
+  :global(h6) {
+    font-size: var(--small);
+  }
+
+  :global(p) {
+    font-size: var(--body);
+  }
+
+	:global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+	:global(p + h1, p + h2, p + h4,
+		ul + h1, ul + h2, ul + h4,
+		ol + h1, ol + h2, ol + h4) {
+    margin-top: calc(var(--rythm)*2);
+  }
+
+  :global(h1 + h2, h2 + h4, h4 + h6) {
+    margin-top: calc(var(--rythm) / -1.25);
+  }
+
+  :global(ul, ol) {
+    margin: 0 0 var(--rythm);
+    padding-left: var(--rythm);
+  }
+
+  :global(a, button, input) {
+    outline: none;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    border: none;
+    background: transparent;
+    transition: font-variation-settings 333ms;
+  }
+
+  figure {
+    position: fixed;
+    z-index: 666;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    background: var(--grey);
+  }
+</style>
+
+<Header {segment} />
+
+<main>
+	<slot></slot>
+</main>
+
+{#if $preloading}
+<figure transition:fade />
+{/if}

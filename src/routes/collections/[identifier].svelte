@@ -15,12 +15,13 @@
 
 <script>
   import Collection from '../../components/Collection.svelte'
+	import Document from '../../components/document/index.svelte'
 
 	export let collection
 </script>
 
 <style>
-	h1, h2 {
+	h1, summary {
 		text-align: center;
 	}
 </style>
@@ -30,6 +31,6 @@
 </svelte:head>
 
 <h1>{collection.fields.title}</h1>
-<h2>Something</h2>
+<summary><Document body={collection.fields.description} /></summary>
 
 <Collection {collection} />

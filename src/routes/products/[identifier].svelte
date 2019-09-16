@@ -14,16 +14,50 @@
 </script>
 
 <script>
+	import Picture from '../../components/Picture.svelte'
+	import Document from '../../components/document/index.svelte'
+
 	export let product
 	export let collection
 </script>
 
 <style>
+	section {
+		display: flex;
+	}
+
+	figure {
+		width: 42vw;
+	}
+
+		figure :global(img) {
+			margin-bottom: var(--rythm);
+		}
+
+	article {
+		padding: calc(var(--gutter) / 2);
+	}
+
+	article :global(p) {
+		max-width: calc(var(--rythm) * 33);
+	}
 </style>
 
 <svelte:head>
 	<title>{product.fields.title}</title>
 </svelte:head>
 
-<a rel=prefetch href="collections/{collection.fields.identifier}">{collection.fields.title}</a>
-<h1>{product.fields.title}</h1>
+<section>
+	<figure>
+		{#each product.fields.photos as photo}
+		<Picture media={photo} />
+		{/each}
+	</figure>
+
+	<article>
+		<a rel=prefetch href="collections/{collection.fields.identifier}">{collection.fields.title}</a>
+		<h1>{product.fields.title}</h1>
+
+		<Document body={product.fields.description} />
+	</article>
+</section>

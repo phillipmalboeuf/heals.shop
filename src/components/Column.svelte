@@ -1,5 +1,6 @@
 <script>
   import Picture from './Picture.svelte'
+  import Document from './document/index.svelte'
   export let column
 </script>
 
@@ -25,7 +26,7 @@
 <section>
   <article class={column.fields.alignment}>
     <h4>{column.fields.title}</h4>
-    <p>Body</p>
+    <Document body={column.fields.body} />
   </article>
   <figure>
     <Picture media={column.fields.photos[0]} />

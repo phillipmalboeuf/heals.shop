@@ -42,12 +42,12 @@
 		color: var(--black);
 		background: var(--grey);
 
-		margin: 0;
+		margin: 0 0 50vh;
     overflow-x: hidden;
 	}
 
 	main {
-		padding: calc(var(--rythm) * 6) var(--gutter) calc(var(--rythm) * 2);
+		padding: calc(var(--gutter) * 3) var(--gutter) var(--gutter);
 	}
 
 	:global(h1, h2, h3, h4, h5, h6, p, figure) {
@@ -62,6 +62,7 @@
 
 	:global(h1) {
     font-size: var(--huge);
+    line-height: 1;
   }
 
   :global(h2) {
@@ -103,6 +104,7 @@
     outline: none;
     cursor: pointer;
     color: inherit;
+    font-size: var(--body);
     text-decoration: none;
     position: relative;
     border: none;

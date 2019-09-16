@@ -8,9 +8,11 @@
 <style>
   header {
     position: fixed;
+    z-index: 20;
     top: 0;
     left: 0;
     width: 100%;
+    padding: calc(var(--gutter) / 3);
   }
 
   nav {
@@ -19,11 +21,11 @@
     align-items: center;
   }
 
-  nav > a {
+  nav > div {
     width: 25%;
   }
 
-  nav > a:last-child {
+  nav > div:last-child {
     text-align: right;
   }
 
@@ -34,15 +36,19 @@
     display: flex;
   }
 
-    a {
+    a, button {
       display: inline-block;
       padding: calc(var(--rythm) / 2);
+      font-size: var(--medium);
+      color: var(--navy);
     }
 </style>
 
 <header>
   <nav>
-    <a href="./"><img src="{$session.content.logo.fields.file.url}" alt="{$session.content.logo.fields.description}" /></a>
+    <div>
+      <a href="./"><img src="{$session.content.logo.fields.file.url}" alt="{$session.content.logo.fields.description}" /></a>
+    </div>
     <ul>
       {#each $session.content.headerNavigation.fields.links as link}
       <li>
@@ -50,6 +56,8 @@
       </li>
       {/each}
     </ul>
-    <a href="mailto:hi@heals.shop" target="_blank">Email</a>
+    <div>
+      <button>Cart</button>
+    </div>
   </nav>
 </header>

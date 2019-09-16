@@ -1,6 +1,7 @@
 <script>
   import { fade } from 'svelte/transition'
   import Header from '../components/Header.svelte'
+  import Footer from '../components/Footer.svelte'
 
   import { stores } from '@sapper/app'
 	const { preloading } = stores()
@@ -30,6 +31,7 @@
 
 	:global(html) {
     background-color: var(--navy);
+    position: relative;
   }
 
 	:global(body) {
@@ -41,7 +43,7 @@
 
 		color: var(--black);
 		background: var(--grey);
-
+    
 		margin: 0 0 50vh;
     overflow-x: hidden;
 	}
@@ -112,6 +114,11 @@
     transition: font-variation-settings 333ms;
   }
 
+  :global(button, input) {
+    border: 2px solid var(--grey);
+    border-radius: 6px;
+  }
+
   figure {
     position: fixed;
     z-index: 666;
@@ -130,6 +137,9 @@
 	<slot></slot>
 </main>
 
+<Footer {segment} />
+
 {#if $preloading}
 <figure transition:fade />
 {/if}
+

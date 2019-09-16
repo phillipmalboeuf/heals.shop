@@ -16,7 +16,8 @@ const content = locale => async (req, res, next) => {
 	]).then(async ([navigations, logo])=> {
 		return {
 			logo,
-			headerNavigation: navigations.items.find(nav => nav.fields.isInThe === 'Header')
+			headerNavigation: navigations.items.find(nav => nav.fields.isInThe === 'Header'),
+			footerNavigation: navigations.items.find(nav => nav.fields.isInThe === 'Footer')
 		}
 	})
 

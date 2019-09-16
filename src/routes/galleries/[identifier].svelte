@@ -14,11 +14,13 @@
 </script>
 
 <script>
+	import Document from '../../components/document/index.svelte'
+
 	export let gallery
 </script>
 
 <style>
-	h1, h2 {
+	h1, summary {
 		text-align: center;
 	}
 </style>
@@ -28,4 +30,4 @@
 </svelte:head>
 
 <h1>{gallery.fields.title}</h1>
-<h2>Something</h2>
+<summary><Document body={gallery.fields.description} /></summary>

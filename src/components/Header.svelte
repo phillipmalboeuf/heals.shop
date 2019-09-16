@@ -13,6 +13,7 @@
     left: 0;
     width: 100%;
     padding: calc(var(--gutter) / 3);
+    pointer-events: none;
   }
 
   nav {
@@ -37,6 +38,7 @@
   }
 
     a, button {
+      pointer-events: auto;
       display: inline-block;
       padding: calc(var(--rythm) / 2);
       font-size: var(--medium);

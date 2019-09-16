@@ -14,6 +14,7 @@
 </script>
 
 <script>
+	import Document from '../../components/document/index.svelte'
 	export let page
 </script>
 
@@ -25,4 +26,4 @@
 </svelte:head>
 
 <h1>{page.fields.title}</h1>
-<h2>Something</h2>
+<Document body={page.fields.body} />

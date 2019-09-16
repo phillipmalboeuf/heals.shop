@@ -41,6 +41,19 @@
 	article :global(p) {
 		max-width: calc(var(--rythm) * 33);
 	}
+
+	button {
+		font-size: var(--medium);
+		padding: calc(var(--rythm) / 2) calc(var(--rythm) * 2);
+		color: white;
+		background: var(--black);
+	}
+
+	button[disabled] {
+		pointer-events: none;
+		background: var(--navy);
+		opacity: 0.33;
+	}
 </style>
 
 <svelte:head>
@@ -57,7 +70,13 @@
 	<article>
 		<a rel=prefetch href="collections/{collection.fields.identifier}">{collection.fields.title}</a>
 		<h1>{product.fields.title}</h1>
+		<h2>{#if product.fields.comingSoon}–– CAD{:else}{product.fields.price} CAD{/if}</h2>
 
 		<Document body={product.fields.description} />
+
+		<form action="">
+
+			{#if product.fields.comingSoon}<button type="submit" disabled>Coming Soon</button>{:else}<button type="submit">Add to Cart</button>{/if}
+		</form>
 	</article>
 </section>

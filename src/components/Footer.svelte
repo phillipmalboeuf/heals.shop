@@ -7,7 +7,7 @@
 
 <style>
   footer {
-    position: absolute;
+    position: fixed;
     z-index: 0;
     bottom: 0;
     left: 0;

@@ -49,6 +49,9 @@
 	}
 
 	main {
+    position: relative;
+    z-index: 10;
+    background: var(--grey);
 		padding: calc(var(--gutter) * 3) var(--gutter) var(--gutter);
 	}
 

@@ -21,8 +21,8 @@
 </script>
 
 <style>
-	h1, summary {
-		text-align: center;
+	h1 {
+		/* margin-top: var(--gutter); */
 	}
 </style>
 

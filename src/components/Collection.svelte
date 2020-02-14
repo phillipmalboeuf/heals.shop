@@ -10,13 +10,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: calc((var(--gutter) / -2) + var(--rythm) * 4) calc(var(--gutter) / -2);
+    margin: calc((var(--gutter) / -4) + var(--rythm) * 4) calc(var(--gutter) / -4);
   }
 
     li {
       width: 33.3%;
-      padding: calc(var(--gutter) / 2);
-      text-align: center;
+      padding: calc(var(--gutter) / 4);
+      /* text-align: center; */
     }
 </style>
 

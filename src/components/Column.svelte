@@ -7,15 +7,21 @@
 <style>
   section {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
+    margin: calc((var(--gutter) / -4) + var(--rythm) * 4) calc(var(--gutter) / -4);
   }
 
-    article, figure {
-      width: 50%;
+    figure {
+      width: 40%;
+      padding: calc(var(--gutter) / 4);
+    }
+
+    figure:last-child {
+      width: 60%;
     }
 
     article {
-      padding: var(--gutter);
+      padding: calc(var(--gutter));
     }
 
     figure {
@@ -24,10 +30,14 @@
 </style>
 
 <section>
-  <article class={column.fields.alignment}>
-    <h4>{column.fields.title}</h4>
-    <Document body={column.fields.body} />
-  </article>
+  <figure>
+    <Picture media={column.fields.photos[0]} />
+
+    <article class={column.fields.alignment}>
+      <h4>{column.fields.title}</h4>
+      <Document body={column.fields.body} />
+    </article>
+  </figure>
   <figure>
     <Picture media={column.fields.photos[0]} />
   </figure>

@@ -15,8 +15,8 @@
   }
 
 	:global(:root) {
-    --rythm: 20px;
-		--gutter: 5vw;
+    --rythm: 16px;
+		--gutter: 3vw;
 
 		--huge: 5vw;
 		--big: 32px;
@@ -27,6 +27,9 @@
 		--black: #1D2135;
 		--navy: #3F5277;
 		--grey: #E9E3E8;
+
+    --serif: 'Untitled Serif Test', 'Times New Roman', Times, serif;
+    --sans: "Inter", system-ui, -apple-system;
   }
 
 	:global(html) {
@@ -51,8 +54,8 @@
 	main {
     position: relative;
     z-index: 10;
-    background: var(--grey);
-		padding: calc(var(--gutter) * 3) var(--gutter) var(--gutter);
+    background: white;
+		padding: calc(6.66vw + var(--gutter)) var(--gutter) var(--gutter);
 	}
 
 	:global(h1, h2, h3, h4, h5, h6, p, figure) {
@@ -61,11 +64,8 @@
     /* white-space: pre-line; */
   }
 
-	:global(h1, h4) {
-		font-family: 'Untitled Serif Test', 'Times New Roman', Times, serif
-	}
-
 	:global(h1) {
+    font-family: var(--serif);
     font-size: var(--huge);
     line-height: 1;
   }
@@ -130,7 +130,7 @@
     width: 100vw;
     height: 100vh;
     margin: 0;
-    background: var(--grey);
+    background: white;
   }
 </style>
 

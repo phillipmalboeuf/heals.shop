@@ -47,6 +47,8 @@
 
   form > label {
     display: inline-block;
+    width: 100%;
+    text-align: left;
     margin-bottom: calc(var(--rythm) / 3);
   }
 

@@ -15,24 +15,18 @@
 
 	import Collection from '../components/Collection.svelte'
 	import Column from '../components/Column.svelte'
+	import Hero from '../components/Hero.svelte'
 	import Document from '../components/document/index.svelte'
 
 	export let collection
 	export let column
 </script>
 
-<style>
-	h1, summary {
-		text-align: center;
-	}
-</style>
-
 <svelte:head>
 	<title>{collection.fields.title}</title>
 </svelte:head>
 
-<h1>{collection.fields.title}</h1>
-<summary><Document body={collection.fields.description} /></summary>
+<Hero title={collection.fields.title} summary={collection.fields.description} />
 
 <Collection {collection} />
 <Column {column} />

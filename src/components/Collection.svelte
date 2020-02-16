@@ -25,7 +25,7 @@
   <li>
     <a rel=prefetch href="products/{product.fields.identifier}?collection={collection.fields.identifier}">
       <figure><Picture media={product.fields.photos[0]} /></figure>
-      <h4>{product.fields.title}</h4>
+      <h3>{product.fields.title}</h3>
       <h6>{#if product.fields.comingSoon}Coming Soon{:else}{product.fields.price} CAD{/if}</h6>
     </a>
   </li>

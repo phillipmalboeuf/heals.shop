@@ -17,12 +17,10 @@
 	import Picture from '../../components/Picture.svelte'
 	import Document from '../../components/document/index.svelte'
 
+	import { visible, addToCart } from '../../components/Cart.svelte'
+
 	export let product
 	export let collection
-
-	function addToCart(event) {
-		console.log(event.currentTarget.color.value)
-	}
 </script>
 
 <style>
@@ -74,6 +72,14 @@
 		margin: 0 auto;
 	}
 
+	input[type="radio"] + label {
+		cursor: pointer;
+	}
+
+	input[type="radio"]:not([style]) {
+		display: none;
+	}
+
 	input[type="radio"]:checked {
 		border-color: var(--black);
 	}
@@ -95,22 +101,40 @@
 	</figure>
 
 	<article>
+		{#if collection}
 		<a rel=prefetch href="collections/{collection.fields.identifier}">{collection.fields.title}</a>
+		{/if}
+		
 		<h1>{product.fields.title}</h1>
 		<h2>{#if product.fields.comingSoon}–– CAD{:else}{product.fields.price} CAD{/if}</h2>
 
 		<Document body={product.fields.description} />
 
-		<form on:submit|preventDefault={addToCart}>
+		<form on:submit|preventDefault={e => {
+			addToCart(product.fields.identifier, e.target.size.value, e.target.color.value, product.fields.title, product.fields.photos[0])
+			visible.set(true)
+		}}>
+
+			<section>
+				<div>Size:</div>
+				{#each [6, 7, 7.5, 8, 8.5, 9] as size, index}
+				<div>
+					<input type="radio" name="size" value={size} id={size}
+						checked={index === 0}>
+					<label for={size}>{size}</label>
+				</div>
+				{/each}
+			</section>
+
 			{#if product.fields.colors}
 			<section>
-			{#each Object.keys(product.fields.colors) as color, index}
-			<div>
-				<input type="radio" name="color" value={color} id={color} style="background:{product.fields.colors[color]}"
-					checked={index === 0}>
-				<label for={color}>{color}</label>
-			</div>
-			{/each}
+				{#each Object.keys(product.fields.colors) as color, index}
+				<div>
+					<input type="radio" name="color" value={color} id={color} style="background:{product.fields.colors[color]}"
+						checked={index === 0}>
+					<label for={color}>{color}</label>
+				</div>
+				{/each}
 			</section>
 			{/if}
 

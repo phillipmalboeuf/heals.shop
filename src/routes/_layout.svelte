@@ -2,6 +2,7 @@
   import { fade } from 'svelte/transition'
   import Header from '../components/Header.svelte'
   import Footer from '../components/Footer.svelte'
+  import Cart from '../components/Cart.svelte'
 
   import { stores } from '@sapper/app'
 	const { preloading } = stores()
@@ -26,7 +27,8 @@
 
 		--black: #1D2135;
 		--navy: #3F5277;
-		--grey: #E9E3E8;
+		--grey: #EDEDED;
+    --taupe: #C0B2BE;
 
     --serif: 'Untitled Serif Test', 'Times New Roman', Times, serif;
     --sans: "Inter", system-ui, -apple-system;
@@ -45,7 +47,7 @@
     -moz-osx-font-smoothing: grayscale;
 
 		color: var(--black);
-		background: var(--grey);
+		background: white;
     
 		margin: 0 0 50vh;
     overflow-x: hidden;
@@ -74,8 +76,14 @@
     font-size: var(--big);
   }
 
+  :global(h3) {
+    font-size: var(--big);
+    font-family: var(--serif);
+  }
+
   :global(h4) {
     font-size: var(--medium);
+    font-family: var(--serif);
   }
 
   :global(h6) {
@@ -96,7 +104,7 @@
     margin-top: calc(var(--rythm)*2);
   }
 
-  :global(h1 + h2, h2 + h4, h4 + h6) {
+  :global(h1 + h2, h2 + h4, h3 + h6, h4 + h6) {
     margin-top: calc(var(--rythm) / -1.25);
   }
 
@@ -126,6 +134,12 @@
     top: 1px;
   }
 
+  :global(button.transparent) {
+    border: none;
+    border-radius: none;
+    background: transparent;
+  }
+
   figure {
     position: fixed;
     z-index: 666;
@@ -145,6 +159,8 @@
 </main>
 
 <Footer {segment} />
+
+<Cart />
 
 {#if $preloading}
 <figure transition:fade />

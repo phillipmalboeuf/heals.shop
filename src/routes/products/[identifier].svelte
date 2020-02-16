@@ -19,6 +19,10 @@
 
 	export let product
 	export let collection
+
+	function addToCart(event) {
+		console.log(event.currentTarget.color.value)
+	}
 </script>
 
 <style>
@@ -35,6 +39,7 @@
 		}
 
 	article {
+		width: 58vw;
 		padding: calc(var(--gutter) / 2);
 	}
 
@@ -53,6 +58,28 @@
 		pointer-events: none;
 		background: var(--navy);
 		opacity: 0.33;
+	}
+
+	section > div {
+		margin: 0 0.5vw var(--rythm);
+	}
+
+	input[type="radio"] {
+		appearance: none;
+		-webkit-appearance: none;
+		display: block;
+		width: calc(var(--rythm) * 3);
+		height: calc(var(--rythm) * 3);
+		border-radius: 50%;
+		margin: 0 auto;
+	}
+
+	input[type="radio"]:checked {
+		border-color: var(--black);
+	}
+
+	input[type="radio"]:checked + label {
+		text-decoration: underline;
 	}
 </style>
 
@@ -74,7 +101,18 @@
 
 		<Document body={product.fields.description} />
 
-		<form action="">
+		<form on:submit|preventDefault={addToCart}>
+			{#if product.fields.colors}
+			<section>
+			{#each Object.keys(product.fields.colors) as color, index}
+			<div>
+				<input type="radio" name="color" value={color} id={color} style="background:{product.fields.colors[color]}"
+					checked={index === 0}>
+				<label for={color}>{color}</label>
+			</div>
+			{/each}
+			</section>
+			{/if}
 
 			{#if product.fields.comingSoon}<button type="submit" disabled>Coming Soon</button>{:else}<button type="submit">Add to Cart</button>{/if}
 		</form>

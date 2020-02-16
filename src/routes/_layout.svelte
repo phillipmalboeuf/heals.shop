@@ -122,6 +122,10 @@
     border-radius: 6px;
   }
 
+  :global(a:active, button:active, input:active) {
+    top: 1px;
+  }
+
   figure {
     position: fixed;
     z-index: 666;

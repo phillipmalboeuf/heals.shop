@@ -5,9 +5,9 @@
   export const visible = writable(false)
   export const items = writable([])
 
-  export const addToCart = (sku, size, color, title, thumbnail) => {
+  export const addToCart = (sku, size, color, title, price, thumbnail) => {
     items.update(list => {
-      list.push({ sku, size, color, title, thumbnail })
+      list.push({ sku, size, color, title, price, thumbnail })
       return list
     })
   }
@@ -21,6 +21,7 @@
 </script>
 
 <script>
+  import json from 'json-complete'
   import Picture from './Picture.svelte'
 </script>
 
@@ -110,6 +111,10 @@
       li > h2 {
         padding-right: var(--rythm);
       }
+
+      img {
+        width: 100%;
+      }
 </style>
 
 {#if $visible}
@@ -124,19 +129,23 @@
     {#each $items as item, index}
       <li>
         <figure>
-          <Picture media={item.thumbnail} />
+          <picture>
+            <img src={item.thumbnail} alt={item.title} />
+          </picture>
         </figure>
         <summary>
           <h3>{item.title}</h3>
           <small>{item.color}, Size {item.size}</small>
         </summary>
-        <h2>188 CAD</h2>
+        <h2>{item.price} CAD</h2>
         <button class="transparent" on:click={() => removeFromCart(index)}>✕</button>
       </li>
     {/each}
     </ol>
 
-    <button class="checkout">Proceed to Checkout</button><br />
+    <a href="/checkout?items={encodeURIComponent(json.encode($items))}" on:click={() => visible.set(false)}>
+      <button class="checkout">Proceed to Checkout</button>
+    </a><br />
     {:else}
     <h4>Your cart is currently empty.</h4>
     {/if}

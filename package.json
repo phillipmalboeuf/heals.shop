@@ -15,6 +15,8 @@
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.0.0",
+    "body-parser": "^1.19.0",
     "compression": "",
     "contentful": "^7.9.1",
     "json-complete": "^2.0.0",

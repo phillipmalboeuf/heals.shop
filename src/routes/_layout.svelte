@@ -162,7 +162,7 @@
 
 <Cart />
 
-{#if $preloading}
+<!-- {#if $preloading}
 <figure transition:fade />
-{/if}
+{/if} -->
 

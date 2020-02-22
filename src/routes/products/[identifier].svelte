@@ -111,7 +111,7 @@
 		<Document body={product.fields.description} />
 
 		<form on:submit|preventDefault={e => {
-			addToCart(product.fields.identifier, e.target.size.value, e.target.color.value, product.fields.title, product.fields.price, `${product.fields.photos[0].fields.file.url}?w=600`)
+			addToCart(product.fields.skus[`${product.fields.title} in ${e.target.color.value} size ${e.target.size.value}`], e.target.size.value, e.target.color.value, product.fields.title, product.fields.price, `${product.fields.photos[0].fields.file.url}?w=600`)
 			visible.set(true)
 		}}>
 

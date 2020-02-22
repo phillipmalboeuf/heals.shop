@@ -39,13 +39,19 @@
   })
 
   const checkout = async () => {
+    const skus = $items.reduce((_, { sku }) => {
+      return _[sku]
+        ? { ..._, [sku]: _[sku] + 1 }
+        : { ..._, [sku]: 1 }
+    }, {})
+    
     const stripe = await loadStripe('pk_test_rz8eXQl5uOAVXLJrZM4oAkBb003cqy35qz')
     stripe.redirectToCheckout({
       successUrl: 'http://localhost:3000',
       cancelUrl: 'http://localhost:3000',
-      items: $items.map(item => ({
-        sku: 'sku_GlAltw52EpcHPr',
-        quantity: 1
+      items: Object.keys(skus).map(sku => ({
+        sku,
+        quantity: skus[sku]
       }))
     })
   }

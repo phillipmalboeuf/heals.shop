@@ -3,7 +3,7 @@ import contentful from '../../clients/contentful'
 
 export async function get({ locale, params, query }, res) {
   const { identifier } = params
-	const products = await contentful.getEntries({ content_type: 'product', locale, select: 'sys.id,fields.title,fields.identifier,fields.description,fields.photos,fields.price,fields.comingSoon,fields.colors', 'fields.identifier': identifier })
+	const products = await contentful.getEntries({ content_type: 'product', locale, select: 'sys.id,fields.title,fields.identifier,fields.description,fields.photos,fields.price,fields.comingSoon,fields.colors,fields.skus', 'fields.identifier': identifier })
 
   let { collection } = query
   if (collection) {

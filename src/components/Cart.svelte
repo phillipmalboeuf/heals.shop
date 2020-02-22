@@ -23,6 +23,32 @@
 <script>
   import json from 'json-complete'
   import Picture from './Picture.svelte'
+  import { loadStripe } from '@stripe/stripe-js'
+
+  import { onMount } from 'svelte'
+
+  onMount(()=> {
+    const storedItems = sessionStorage.getItem('items')
+    if (storedItems) {
+      items.set(json.decode(storedItems))
+    }
+
+    items.subscribe(list => {
+      sessionStorage.setItem('items', json.encode(list))
+    })
+  })
+
+  const checkout = async () => {
+    const stripe = await loadStripe('pk_test_rz8eXQl5uOAVXLJrZM4oAkBb003cqy35qz')
+    stripe.redirectToCheckout({
+      successUrl: 'http://localhost:3000',
+      cancelUrl: 'http://localhost:3000',
+      items: $items.map(item => ({
+        sku: 'sku_GlAltw52EpcHPr',
+        quantity: 1
+      }))
+    })
+  }
 </script>
 
 <style>
@@ -59,7 +85,7 @@
       z-index: 29;
       width: 100vw;
       height: 100vh;
-      background: hsla(0, 0%, 100%, 0.94);
+      background: hsla(0, 0%, 100%, 0.88);
     }
 
     button.close {
@@ -118,7 +144,7 @@
 </style>
 
 {#if $visible}
-<button class="transparent back" transition:fade on:click={() => visible.set(false)} />
+<button class="transparent back" transition:fade={{ opacity: 0.5 }} on:click={() => visible.set(false)} />
 <dialog open transition:fade>
   <div>
     <button class="transparent underline close" on:click={() => visible.set(false)}>Close ✕</button>
@@ -143,9 +169,8 @@
     {/each}
     </ol>
 
-    <a href="/checkout?items={encodeURIComponent(json.encode($items))}" on:click={() => visible.set(false)}>
-      <button class="checkout">Proceed to Checkout</button>
-    </a><br />
+    <button class="checkout" on:click={checkout}>Proceed to Checkout</button>
+    <br />
     {:else}
     <h4>Your cart is currently empty.</h4>
     {/if}

@@ -125,9 +125,26 @@
     transition: font-variation-settings 333ms;
   }
 
-  :global(button, input) {
+  :global(button) {
     border: 2px solid var(--grey);
     border-radius: 6px;
+  }
+
+  :global(label) {
+    font-size: var(--body);
+    color: var(--navy);
+  }
+
+  :global(input) {
+    font-size: var(--medium);
+    width: 100%;
+    padding: 0.333em;
+    border-bottom: 2px solid var(--grey);
+    margin-bottom: var(--rythm);
+  }
+
+  :global(input:last-of-type) {
+    margin-bottom: calc(var(--rythm) * 2);
   }
 
   :global(a:active, button:active, input:active) {

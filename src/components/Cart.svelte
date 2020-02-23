@@ -38,21 +38,46 @@
     })
   })
 
-  const checkout = async () => {
-    const skus = $items.reduce((_, { sku }) => {
-      return _[sku]
-        ? { ..._, [sku]: _[sku] + 1 }
-        : { ..._, [sku]: 1 }
-    }, {})
-    
+
+  let shipping = false
+
+
+  const hide = () => {
+    visible.set(false)
+    shipping = false
+  }
+
+  const checkout = async (email, address) => {
+    // const skus = $items.reduce((_, { sku }) => {
+    //   return _[sku]
+    //     ? { ..._, [sku]: _[sku] + 1 }
+    //     : { ..._, [sku]: 1 }
+    // }, {})
+
+    const res = await fetch(`/checkout.json`, {
+      method:'POST',
+      body: JSON.stringify({
+        items: $items,
+        email,
+        address
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+		const { session } = JSON.parse(await res.text())
+
     const stripe = await loadStripe('pk_test_rz8eXQl5uOAVXLJrZM4oAkBb003cqy35qz')
     stripe.redirectToCheckout({
-      successUrl: 'http://localhost:3000',
-      cancelUrl: 'http://localhost:3000',
-      items: Object.keys(skus).map(sku => ({
-        sku,
-        quantity: skus[sku]
-      }))
+      sessionId: session.id
+      // successUrl: 'http://localhost:3000',
+      // cancelUrl: 'http://localhost:3000',
+      // items: Object.keys(skus).map(sku => ({
+      //   sku,
+      //   quantity: skus[sku]
+      // })),
+      // metadata: { address }
     })
   }
 </script>
@@ -81,6 +106,7 @@
     border: 1px solid var(--grey);
     border-radius: 6px;
     max-height: 100vh;
+    max-width: 42ch;
     overflow-y: auto;
   }
 
@@ -147,13 +173,19 @@
       img {
         width: 100%;
       }
+
+  label {
+    display: block;
+    text-align: left;
+  }
 </style>
 
 {#if $visible}
-<button class="transparent back" transition:fade={{ opacity: 0.5 }} on:click={() => visible.set(false)} />
+<button class="transparent back" transition:fade={{ opacity: 0.5 }} on:click={hide} />
 <dialog open transition:fade>
+  {#if !shipping}
   <div>
-    <button class="transparent underline close" on:click={() => visible.set(false)}>Close ✕</button>
+    <button class="transparent underline close" on:click={hide}>Close ✕</button>
     <h2>Your Cart</h2>
 
     {#if $items.length}
@@ -175,13 +207,53 @@
     {/each}
     </ol>
 
-    <button class="checkout" on:click={checkout}>Proceed to Checkout</button>
+    <button class="checkout" on:click={() => shipping = true}>Continue to Shipping</button>
     <br />
     {:else}
     <h4>Your cart is currently empty.</h4>
     {/if}
     
-    <button class="transparent underline" on:click={() => visible.set(false)}>Keep Shopping</button>
+    <button class="transparent underline" on:click={hide}>Keep Shopping</button>
   </div>
+  {:else}
+  <div>
+    <button class="transparent underline close" on:click={() => shipping = false}>Back to Cart</button>
+    <h2>Shipping Address</h2>
+
+    <form on:submit|preventDefault={e => {
+      checkout(e.target['email'].value, {
+        name: e.target['name'].value,
+        street1: e.target['street1'].value,
+        street2: e.target['street2'].value,
+        city: e.target['city'].value,
+        state: e.target['state'].value,
+        country: e.target['country'].value,
+      })
+    }}>
+      <label for="email">Email Address</label>
+      <input type="email" name="email" id="email">
+
+      <label for="name">Full Name</label>
+      <input type="text" name="name" id="name">
+
+      <label for="street1">Street Address</label>
+      <input type="text" name="street1" id="street1">
+
+      <label for="street2">Apt/Unit/Suite</label>
+      <input type="text" name="street2" id="street2">
+
+      <label for="city">City</label>
+      <input type="text" name="city" id="city">
+
+      <label for="state">Province</label>
+      <input type="text" name="state" id="state">
+
+      <label for="country">Country</label>
+      <input type="text" name="country" id="country" value="Canada" readonly>
+
+      <button class="checkout" type="submit">Proceed to Checkout</button>
+    </form>
+  </div>
+  {/if}
 </dialog>
 {/if}

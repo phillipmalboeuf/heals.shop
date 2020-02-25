@@ -152,13 +152,13 @@
     }
 
       li > figure {
-        width: 10vw;
+        width: 9ch;
         padding-right: var(--rythm);
         margin: 0;
       }
 
       li > summary {
-        width: 24ch;
+        width: 16ch;
       }
 
       li > h2,

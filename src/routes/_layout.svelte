@@ -109,7 +109,7 @@
   }
 
   :global(ul, ol) {
-    margin: 0 0 var(--rythm);
+    margin: 0 0 calc(var(--rythm) * 1.5);
     padding-left: var(--rythm);
   }
 
@@ -131,8 +131,8 @@
   }
 
   :global(label) {
-    font-size: var(--body);
-    color: var(--navy);
+    /* font-size: var(--body);
+    color: var(--navy); */
   }
 
   :global(input) {
@@ -152,6 +152,7 @@
   }
 
   :global(button.transparent) {
+    padding: 0;
     border: none;
     border-radius: none;
     background: transparent;

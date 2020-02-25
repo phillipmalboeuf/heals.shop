@@ -36,6 +36,11 @@
 			margin-bottom: var(--rythm);
 		}
 
+		figure :global(picture:not(:first-child) img) {
+			width: 33%;
+		}
+
+
 	article {
 		width: 58vw;
 		padding: calc(var(--gutter) / 2);

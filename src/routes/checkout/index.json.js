@@ -4,7 +4,7 @@ const stripe = stripeClient('sk_test_LCxi3dAujVlOrsB7ClMVhbB900rsF3ssu4')
 export async function post({ body, headers }, res) {
 
   const session = await stripe.checkout.sessions.create({
-    success_url: `http://${headers.host}`,
+    success_url: `http://${headers.host}/checkout/{CHECKOUT_SESSION_ID}`,
     cancel_url: `http://${headers.host}`,
     payment_method_types: ['card'],
     customer_email: body.email,

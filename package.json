@@ -20,6 +20,7 @@
     "compression": "",
     "contentful": "^7.9.1",
     "json-complete": "^2.0.0",
+    "nconf": "^0.10.0",
     "polka": "next",
     "sirv": "",
     "stripe": "^7.9.0"

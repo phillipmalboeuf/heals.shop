@@ -1,7 +1,7 @@
 import sirv from 'sirv';
 import polka from 'polka';
 import compression from 'compression';
-import { json } from 'body-parser';
+import { json, raw } from 'body-parser';
 import * as sapper from '@sapper/server';
 
 import contentful from './clients/contentful'
@@ -26,6 +26,11 @@ const content = locale => async (req, res, next) => {
 }
 
 polka()
+	.use(
+		'/raw',
+		raw({ type: 'application/json' }),
+		sapper.middleware()
+	)
 	.use(
 		content('en-US'),
 		json(),

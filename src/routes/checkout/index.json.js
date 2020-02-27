@@ -1,5 +1,4 @@
-import stripeClient from 'stripe'
-const stripe = stripeClient('sk_test_LCxi3dAujVlOrsB7ClMVhbB900rsF3ssu4')
+import stripe from '../../clients/stripe'
 
 export async function post({ body, headers }, res) {
 

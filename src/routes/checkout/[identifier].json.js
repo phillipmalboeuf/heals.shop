@@ -8,6 +8,8 @@ export async function get({ locale, params }, res) {
     expand: ['customer', 'payment_intent'],
   })
 
+  console.log(session.metadata.address)
+
   res.end(json.encode({ checkout: {
     id: session.payment_intent.id,
     email: session.customer_email,

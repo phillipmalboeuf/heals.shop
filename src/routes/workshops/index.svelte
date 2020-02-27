@@ -16,11 +16,11 @@
 <style>
 </style>
 
-<h1>Workshops</h1>
-<ol>
+<center><h2>Coming soon...</h2></center>
+<!-- <ol>
   {#each workshops.items as workshop}
   <li>
     <a rel=prefetch href="workshops/{workshop.fields.identifier}">{workshop.fields.title}</a>
   </li>
   {/each}
-</ol>
+</ol> -->

@@ -61,7 +61,7 @@
 <footer>
   <nav>
     <div>
-      <form action="">
+      <!-- <form action="">
         <label for="">Sign up to get updates:</label><br />
         <input type="email" name="email" placeholder="your.email@gmail.com" />
         <button type="submit">Send</button>
@@ -73,9 +73,9 @@
           <a rel=prefetch href="{link.fields.url}">{link.fields.label}</a>
         </li>
         {/each}
-      </ul>
+      </ul> -->
 
-      <small>&copy; Heals Shop 2019</small>
+      &copy; Heals Shop 2020
     </div>
   </nav>
 </footer>

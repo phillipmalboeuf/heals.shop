@@ -35,6 +35,7 @@
 
   figure {
     font-size: var(--huge);
+    color: var(--navy);
     line-height: 1;
     font-family: var(--serif);
     font-weight: bold;
@@ -64,6 +65,7 @@
         width: var(--huge);
         height: var(--huge);
         vertical-align: middle;
+        color: var(--navy);
       }
 
       path {

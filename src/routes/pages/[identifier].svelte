@@ -19,11 +19,17 @@
 </script>
 
 <style>
+	article {
+		max-width: 42ch;
+		margin: 0 auto;
+	}
 </style>
 
 <svelte:head>
 	<title>{page.fields.title}</title>
 </svelte:head>
 
-<h1>{page.fields.title}</h1>
-<Document body={page.fields.body} />
+<article>
+	<h2>{page.fields.title}</h2>
+	<Document body={page.fields.body} />
+</article>

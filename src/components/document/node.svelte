@@ -1,5 +1,6 @@
 <script>
   import Mark from './mark.svelte'
+  import Picture from '../Picture.svelte'
 
   export let node
 </script>
@@ -23,6 +24,6 @@
 {:else if node.nodeType === 'blockquote'}
   <blockquote>{#each node.content as code}<svelte:self node={code} />{/each}</blockquote>
 
-<!-- {:else if node.nodeType === 'embedded-entry-block'} -->
-
+{:else if node.nodeType === 'embedded-asset-block'}
+  <Picture media={node.data.target} />
 {/if}

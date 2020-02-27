@@ -228,6 +228,7 @@
         city: e.target['city'].value,
         state: e.target['state'].value,
         country: e.target['country'].value,
+        zip: e.target['zip'].value,
       })
     }}>
       <label for="email">Email Address</label>
@@ -250,6 +251,9 @@
 
       <label for="country">Country</label>
       <input type="text" name="country" id="country" value="Canada" readonly>
+
+      <label for="zip">Postal Code</label>
+      <input type="zip" name="zip" id="zip">
 
       <button class="checkout" type="submit">Proceed to Checkout</button>
     </form>

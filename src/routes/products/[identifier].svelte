@@ -21,6 +21,8 @@
 
 	export let product
 	export let collection
+
+	let photoIndex = 0
 </script>
 
 <style>
@@ -36,7 +38,7 @@
 			margin-bottom: var(--rythm);
 		}
 
-		figure :global(picture:not(:first-child) img) {
+		figure button {
 			width: 33%;
 		}
 
@@ -50,7 +52,7 @@
 		max-width: calc(var(--rythm) * 33);
 	}
 
-	button {
+	button[type="submit"] {
 		font-size: var(--medium);
 		padding: calc(var(--rythm) / 2) calc(var(--rythm) * 2);
 		color: white;
@@ -100,8 +102,12 @@
 
 <section>
 	<figure>
-		{#each product.fields.photos as photo}
-		<Picture media={photo} />
+		<Picture media={product.fields.photos[photoIndex]} />
+
+		{#each product.fields.photos as photo, index}
+		{#if index !== photoIndex}
+		<button class="transparent" on:click={() => { photoIndex = index }}><Picture media={photo} /></button>
+		{/if}
 		{/each}
 	</figure>
 

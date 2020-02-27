@@ -15,7 +15,8 @@
     width: 100%;
     padding: calc(var(--gutter) / 6) calc(var(--gutter) / 2);
     /* pointer-events: none; */
-    background: white;
+    background: hsla(0, 0%, 100%, 0.95);
+    backdrop-filter: blur(6px);
   }
 
   nav {

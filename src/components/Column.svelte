@@ -39,6 +39,6 @@
     </article>
   </figure>
   <figure>
-    <Picture media={column.fields.photos[0]} />
+    <Picture media={column.fields.photos[1]} />
   </figure>
 </section>

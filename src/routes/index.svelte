@@ -26,7 +26,7 @@
 	<title>{collection.fields.title}</title>
 </svelte:head>
 
-<Hero title={collection.fields.title} summary={collection.fields.description} />
+<Hero title={collection.fields.title} summary={collection.fields.description} photo={collection.fields.heroPhoto} />
 
 <Collection {collection} />
 <Column {column} />

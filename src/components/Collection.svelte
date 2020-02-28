@@ -18,13 +18,36 @@
       padding: calc(var(--gutter) / 4);
       /* text-align: center; */
     }
+
+  figure {
+    position: relative;
+  }
+
+    figure > :global(picture + picture) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 333ms;
+    }
+
+    a:hover figure > :global(picture + picture) {
+      opacity: 1;
+    }
 </style>
 
 <ol>
   {#each collection.fields.products as product}
   <li>
     <a rel=prefetch href="products/{product.fields.identifier}?collection={collection.fields.identifier}">
+      {#if product.fields.photos.length > 1}
+      <figure>
+        <Picture media={product.fields.photos[0]} />
+        <Picture media={product.fields.photos[1]} />
+      </figure>
+      {:else}
       <figure><Picture media={product.fields.photos[0]} /></figure>
+      {/if}
       <h3>{product.fields.title}</h3>
       <h6>{#if product.fields.comingSoon}Coming Soon{:else}{product.fields.price} CAD{/if}</h6>
     </a>

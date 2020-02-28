@@ -7,6 +7,7 @@
 <style>
   section {
     display: flex;
+    flex-wrap: wrap;
     /* align-items: center; */
     margin: calc((var(--gutter) / -4) + var(--rythm) * 4) calc(var(--gutter) / -4);
   }
@@ -18,6 +19,13 @@
 
     figure:last-child {
       width: 60%;
+    }
+
+    @media all and (max-width:666px) {
+      figure,
+      figure:last-child {
+        width: 100%;
+      }
     }
 
     article {

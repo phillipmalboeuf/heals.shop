@@ -30,12 +30,16 @@
   ul {
     list-style: none;
     padding: 0;
-    margin: 0;
-    display: flex;
+    margin: 0 0 var(--rythm);
+    /* display: flex; */
     justify-content: center;
   }
 
-    a, button, input {
+    ul li a {
+      font-size: var(--big);
+    }
+
+    /* a, button, input {
       display: inline-block;
       padding: calc(var(--rythm) / 2);
       font-size: var(--medium);
@@ -55,7 +59,7 @@
     input {
       border-bottom: 2px solid white;
       background: var(--grey);
-    }
+    } */
 </style>
 
 <footer>
@@ -65,7 +69,7 @@
         <label for="">Sign up to get updates:</label><br />
         <input type="email" name="email" placeholder="your.email@gmail.com" />
         <button type="submit">Send</button>
-      </form>
+      </form> -->
 
       <ul>
         {#each $session.content.footerNavigation.fields.links as link}
@@ -73,7 +77,7 @@
           <a rel=prefetch href="{link.fields.url}">{link.fields.label}</a>
         </li>
         {/each}
-      </ul> -->
+      </ul> 
 
       &copy; Heals Shop 2020
     </div>

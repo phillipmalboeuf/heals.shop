@@ -34,6 +34,12 @@
     --sans: "Inter", system-ui, -apple-system;
   }
 
+  @media all and (max-width:666px) {
+    :global(:root) {
+      --huge: 66px;
+    }
+  }
+
 	:global(html) {
     background-color: var(--navy);
     position: relative;
@@ -60,6 +66,12 @@
 		padding: calc(6.66vw + var(--gutter)) var(--gutter) var(--gutter);
     min-height: 100vh;
 	}
+
+  @media all and (max-width:666px) {
+    main {
+      padding-top: 66px;
+    }
+  }
 
 	:global(h1, h2, h3, h4, h5, h6, p, figure) {
 		font-weight: normal;

@@ -28,6 +28,7 @@
 <style>
 	section {
 		display: flex;
+		flex-wrap: wrap;
 	}
 
 	figure {
@@ -48,6 +49,17 @@
 		padding: calc(var(--gutter) / 2);
 	}
 
+	@media all and (max-width:666px) {
+		figure,
+		article {
+			width: 100%;
+		}
+
+		article {
+			margin-bottom: calc(var(--gutter) * 2);
+		}
+	}
+
 	article :global(p) {
 		max-width: calc(var(--rythm) * 33);
 	}
@@ -57,6 +69,12 @@
 		padding: calc(var(--rythm) / 2) calc(var(--rythm) * 2);
 		color: white;
 		background: var(--black);
+	}
+
+	@media all and (max-width:666px) {
+		button[type="submit"] {
+			width: 100%;
+		}
 	}
 
 	button[disabled] {

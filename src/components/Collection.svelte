@@ -19,6 +19,12 @@
       /* text-align: center; */
     }
 
+    @media all and (max-width:666px) {
+      li {
+        width: 100%;
+      }
+    }
+
   figure {
     position: relative;
   }

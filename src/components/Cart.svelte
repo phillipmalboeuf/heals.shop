@@ -89,6 +89,7 @@
     top: 0;
     z-index: 30;
     height: 100vh;
+    max-width: 100vw;
     overflow-y: auto;
     padding: 1vw;
     background: transparent;

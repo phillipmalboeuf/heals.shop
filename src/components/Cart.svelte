@@ -5,9 +5,9 @@
   export const visible = writable(false)
   export const items = writable([])
 
-  export const addToCart = (sku, size, color, title, price, thumbnail) => {
+  export const addToCart = (title, size, color, price, thumbnail) => {
     items.update(list => {
-      list.push({ sku, size, color, title, price, thumbnail })
+      list.push({ title, size, color, price, thumbnail })
       return list
     })
   }
@@ -48,11 +48,6 @@
   }
 
   const checkout = async (email, address) => {
-    // const skus = $items.reduce((_, { sku }) => {
-    //   return _[sku]
-    //     ? { ..._, [sku]: _[sku] + 1 }
-    //     : { ..._, [sku]: 1 }
-    // }, {})
 
     const res = await fetch(`/checkout.json`, {
       method:'POST',
@@ -71,13 +66,6 @@
     const stripe = await loadStripe('pk_test_rz8eXQl5uOAVXLJrZM4oAkBb003cqy35qz')
     stripe.redirectToCheckout({
       sessionId: session.id
-      // successUrl: 'http://localhost:3000',
-      // cancelUrl: 'http://localhost:3000',
-      // items: Object.keys(skus).map(sku => ({
-      //   sku,
-      //   quantity: skus[sku]
-      // })),
-      // metadata: { address }
     })
   }
 </script>

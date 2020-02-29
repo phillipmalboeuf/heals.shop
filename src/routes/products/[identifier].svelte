@@ -3,10 +3,15 @@
 
 	export async function preload({ params, query }) {
 		const res = await this.fetch(`products/${params.identifier}.json?collection=${query.collection}`)
-		const { product, collection } = json.decode(await res.text())
+		const { product, collection, materials } = json.decode(await res.text())
 
 		if (res.status === 200) {
-			return { product, collection }
+			return { product, collection, materials: materials.items.reduce((_, material) => {
+				return {
+					..._,
+					[material.fields.name]: material
+				}
+			}, {}) }
 		} else {
 			this.error(res.status)
 		}
@@ -21,6 +26,9 @@
 
 	export let product
 	export let collection
+	export let materials
+
+	console.log(materials)
 
 	let photoIndex = 0
 </script>
@@ -28,7 +36,6 @@
 <style>
 	section {
 		display: flex;
-		flex-wrap: wrap;
 	}
 
 	figure {
@@ -50,6 +57,10 @@
 	}
 
 	@media all and (max-width:666px) {
+		section {
+			flex-wrap: wrap;
+		}
+		
 		figure,
 		article {
 			width: 100%;
@@ -95,6 +106,8 @@
 		height: calc(var(--rythm) * 3);
 		border-radius: 50%;
 		margin: 0 auto;
+		background-size: cover;
+		background-position: center;
 	}
 
 	input[type="radio"] + label {
@@ -140,7 +153,7 @@
 		<Document body={product.fields.description} />
 
 		<form on:submit|preventDefault={e => {
-			addToCart(product.fields.skus[`${product.fields.title} in ${e.target.color.value} size ${e.target.size.value}`], e.target.size.value, e.target.color.value, product.fields.title, product.fields.price, `${product.fields.photos[0].fields.file.url}?w=600`)
+			addToCart(product.fields.title, e.target.size.value, e.target.color.value, product.fields.price, `${product.fields.photos[0].fields.file.url}?w=600`)
 			visible.set(true)
 		}}>
 
@@ -155,13 +168,13 @@
 				{/each}
 			</section>
 
-			{#if product.fields.colors}
+			{#if product.fields.materials}
 			<section>
-				{#each Object.keys(product.fields.colors) as color, index}
+				{#each product.fields.materials as material, index}
 				<div>
-					<input type="radio" name="color" value={color} id={color} style="background:{product.fields.colors[color]}"
+					<input type="radio" name="color" value={material} id={material} style="background-image: url({materials[material].fields.photo.fields.file.url})"
 						checked={index === 0}>
-					<label for={color}>{color}</label>
+					<label for={material}>{material}</label>
 				</div>
 				{/each}
 			</section>

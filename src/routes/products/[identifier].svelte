@@ -28,8 +28,6 @@
 	export let collection
 	export let materials
 
-	console.log(materials)
-
 	let photoIndex = 0
 </script>
 
@@ -96,34 +94,6 @@
 
 	section > div {
 		margin: 0 0.5vw var(--rythm);
-	}
-
-	input[type="radio"] {
-		appearance: none;
-		-webkit-appearance: none;
-		display: block;
-		width: calc(var(--rythm) * 3);
-		height: calc(var(--rythm) * 3);
-		border-radius: 50%;
-		margin: 0 auto;
-		background-size: cover;
-		background-position: center;
-	}
-
-	input[type="radio"] + label {
-		cursor: pointer;
-	}
-
-	input[type="radio"]:not([style]) {
-		display: none;
-	}
-
-	input[type="radio"]:checked {
-		border-color: var(--black);
-	}
-
-	input[type="radio"]:checked + label {
-		text-decoration: underline;
 	}
 </style>
 

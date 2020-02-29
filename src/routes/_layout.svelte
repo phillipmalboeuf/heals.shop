@@ -22,12 +22,13 @@
 		--huge: 5vw;
 		--big: 32px;
     --medium: 22px;
-    --small: 14px;
+    --small: 15px;
     --body: 16px;
 
 		--black: #1D2135;
 		--navy: #3F5277;
 		--grey: #EDEDED;
+    --light: #F5F5F5;
     --taupe: #C0B2BE;
 
     --serif: 'Untitled Serif Test', 'Times New Roman', Times, serif;
@@ -37,6 +38,8 @@
   @media all and (max-width:666px) {
     :global(:root) {
       --huge: 66px;
+      --big: 28px;
+      --medium: 20px;
     }
   }
 
@@ -99,8 +102,10 @@
     font-family: var(--serif);
   }
 
-  :global(h6) {
+  :global(h6),
+  :global(small) {
     font-size: var(--small);
+    line-height: 1;
   }
 
   :global(p) {
@@ -152,7 +157,8 @@
     font-size: var(--medium);
     width: 100%;
     padding: 0.333em;
-    border-bottom: 2px solid var(--grey);
+    border-bottom: 2px solid var(--taupe);
+    background: var(--light);
     margin-bottom: var(--rythm);
   }
 
@@ -170,6 +176,34 @@
     border-radius: none;
     background: transparent;
   }
+
+  :global(input[type="radio"]) {
+		appearance: none;
+		-webkit-appearance: none;
+		display: block;
+		width: calc(var(--rythm) * 3);
+		height: calc(var(--rythm) * 3);
+		border-radius: 50%;
+		margin: 0 auto;
+		background-size: cover;
+		background-position: center;
+	}
+
+	:global(input[type="radio"] + label) {
+		cursor: pointer;
+	}
+
+	:global(input[type="radio"]:not([style])) {
+		display: none;
+	}
+
+	:global(input[type="radio"]:checked) {
+		border-color: var(--black);
+	}
+
+	:global(input[type="radio"]:checked + label) {
+		text-decoration: underline;
+	}
 
   figure {
     position: fixed;

@@ -75,11 +75,11 @@
       {#each checkout.items as item}
       <tr>
         <td>
-          <figure>
+          {#if item.thumbnail}<figure>
             <picture>
               <img src={item.thumbnail} alt={item.title} />
             </picture>
-          </figure>
+          </figure>{/if}
         </td>
         <th>{item.quantity} {item.title}</th>
         <td>{item.total} CAD</td>
@@ -94,6 +94,10 @@
         <th>Shipping Address</th>
         <td colspan="2">{Object.values(checkout.shipping).join(` `)}</td>
       </tr>
+      {#if checkout.note}<tr>
+        <th>Note for Victoria</th>
+        <td colspan="2">{checkout.note}</td>
+      </tr>{/if}
     </tbody>
   </table>
 </center>

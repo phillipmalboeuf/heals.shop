@@ -40,7 +40,11 @@
 
 
   let shipping = false
+  let donating = false
 
+  let donation
+  let frequency = 'once'
+  let note
 
   const hide = () => {
     visible.set(false)
@@ -52,9 +56,21 @@
     const res = await fetch(`/checkout.json`, {
       method:'POST',
       body: JSON.stringify({
-        items: $items,
+        items: [
+          ...$items.map(item => ({
+            ...item,
+            name: `${item.title} – ${item.size} – ${item.color}`
+          })),
+          ...(donating && frequency === 'once') ? [{
+            name: 'Donation – Once',
+            price: donation,
+            quantity: 1
+          }] : []
+        ],
+        // ...(donating && frequency === 'monthly') && { subscription: `monthly_${donation}` },
         email,
-        address
+        address,
+        note
       }),
       headers: {
         'Accept': 'application/json',
@@ -99,6 +115,13 @@
     overflow-y: auto;
   }
 
+  @media all and (max-width:666px) {
+    dialog > div {
+      padding: calc(var(--gutter) * 3) calc(var(--gutter));
+      width: 100vw;
+    }
+  }
+
     button.back {
       position: fixed;
       top: 0;
@@ -132,7 +155,7 @@
     list-style: none;
     text-align: left;
     padding: 0;
-    margin: 0 calc(-0.5 * var(--gutter)) var(--rythm);
+    margin: 0 0 var(--rythm);
   }
 
     li {
@@ -155,6 +178,10 @@
         margin-bottom: 0;
       }
 
+      li > summary > small {
+        display: block;
+      }
+
       li > h2 {
         padding-right: var(--rythm);
       }
@@ -163,9 +190,40 @@
         width: 100%;
       }
 
+  aside {
+    font-size: var(--body);
+    margin-bottom: var(--rythm);
+  }
+
+    aside > div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    aside > div:first-of-type  {
+      margin-top: calc(var(--rythm)); 
+    }
+
+    aside > div:last-of-type  {
+      margin-bottom: calc(var(--rythm) * 2); 
+    }
+
+    aside > div > div label {
+      padding: 0 calc(var(--rythm) / 2);
+      font-size: var(--medium);
+    }
+
+    
+
+  form {
+    margin: 0 calc(-0.5 * var(--gutter));
+  }
+
   label {
     display: block;
     text-align: left;
+    font-size: var(--body);
   }
 </style>
 
@@ -178,26 +236,66 @@
     <h2>Your Cart</h2>
 
     {#if $items.length}
-    <ol>
-    {#each $items as item, index}
-      <li>
-        <figure>
-          <picture>
-            <img src={item.thumbnail} alt={item.title} />
-          </picture>
-        </figure>
-        <summary>
-          <h3>{item.title}</h3>
-          <small>{item.color}, Size {item.size}</small>
-        </summary>
-        <h2>{item.price} CAD</h2>
-        <button class="transparent" on:click={() => removeFromCart(index)}>✕</button>
-      </li>
-    {/each}
-    </ol>
+    <form on:submit|preventDefault={e => {
+      if (donating) {
+        donation = e.target['donation'].value
+        // frequency = e.target['frequency'].value
+      }
 
-    <button class="checkout" on:click={() => shipping = true}>Continue to Shipping</button>
-    <br />
+      note = e.target['note'].value
+      shipping = true
+    }}>
+      <ol>
+      {#each $items as item, index}
+        <li>
+          <figure>
+            <picture>
+              <img src={item.thumbnail} alt={item.title} />
+            </picture>
+          </figure>
+          <summary>
+            <h3>{item.title}</h3>
+            <small>{item.color}, Size {item.size}</small>
+          </summary>
+          <h2>{item.price} CAD</h2>
+          <button class="transparent" on:click={() => removeFromCart(index)}>✕</button>
+        </li>
+      {/each}
+      </ol>
+
+      <aside>
+        {#if donating}
+        <button type="button" on:click={() => donating = false}>Sorry, Nevermind</button>
+
+        <div>
+          <div><label>Donate</label></div>
+          {#each [5, 10, 20] as amount, index}
+          <div>
+            <input type="radio" name="donation" value={amount} id={amount}
+              checked={index === 0}>
+            <label for={amount}>{amount} CAD</label>
+          </div>
+          {/each}
+        </div>
+        <!-- <div>
+          {#each Object.entries({ monthly: 'On a monthly basis', once: 'Only once now' }) as [frequency, label], index}
+          <div>
+            <input type="radio" name="frequency" value={frequency} id={frequency}
+              checked={index === 0}>
+            <label for={frequency}>{label}</label>
+          </div>
+          {/each}
+        </div> -->
+        {:else}
+        Looking to help a bit more? <button type="button" on:click={() => donating = true}>Consider Donating</button>
+        {/if}
+      </aside>
+
+      <label for="note">Leave Victoria a note:</label>
+      <input type="text" name="note" id="note">
+
+      <button class="checkout" type="submit">Continue to Shipping</button>
+    </form>
     {:else}
     <h4>Your cart is currently empty.</h4>
     {/if}
@@ -221,28 +319,28 @@
       })
     }}>
       <label for="email">Email Address</label>
-      <input type="email" name="email" id="email">
+      <input type="email" name="email" id="email" required>
 
       <label for="name">Full Name</label>
-      <input type="text" name="name" id="name">
+      <input type="text" name="name" id="name" required>
 
       <label for="street1">Street Address</label>
-      <input type="text" name="street1" id="street1">
+      <input type="text" name="street1" id="street1" required>
 
       <label for="street2">Apt/Unit/Suite</label>
       <input type="text" name="street2" id="street2">
 
       <label for="city">City</label>
-      <input type="text" name="city" id="city">
+      <input type="text" name="city" id="city" required>
 
       <label for="state">Province</label>
-      <input type="text" name="state" id="state">
+      <input type="text" name="state" id="state" required>
 
       <label for="country">Country</label>
       <input type="text" name="country" id="country" value="Canada" readonly>
 
       <label for="zip">Postal Code</label>
-      <input type="zip" name="zip" id="zip">
+      <input type="zip" name="zip" id="zip" required>
 
       <button class="checkout" type="submit">Proceed to Checkout</button>
     </form>

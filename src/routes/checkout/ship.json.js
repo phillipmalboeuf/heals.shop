@@ -29,6 +29,7 @@ export async function post({ body, headers }, res) {
       },
       body: JSON.stringify({
         to_address: JSON.parse(session.metadata.address),
+        notes: session.metadata.note,
         line_items: session.display_items.map(item => ({
           quantity: item.quantity,
           title: item.custom.name,

@@ -135,6 +135,7 @@
       width: 100vw;
       height: 100vh;
       background: hsla(0, 0%, 100%, 0.88);
+      backdrop-filter: blur(20px);
     }
 
     button.close {

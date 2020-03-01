@@ -41,6 +41,7 @@
 
   let shipping = false
   let donating = false
+  let waiting = false
 
   let donation
   let frequency = 'once'
@@ -52,6 +53,7 @@
   }
 
   const checkout = async (email, address) => {
+    waiting = true
 
     const res = await fetch(`/checkout.json`, {
       method:'POST',
@@ -76,6 +78,9 @@
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+    }).catch(error => {
+      console.error(error)
+      waiting = false
     })
 		const { session } = JSON.parse(await res.text())
 
@@ -146,6 +151,10 @@
       background: var(--black);
     }
 
+    button.checkout[disabled] {
+      color: hsla(0, 0%, 100%, 0.66);
+    }
+
     button.underline {
       color: var(--taupe);
       text-decoration: underline;
@@ -213,8 +222,6 @@
       padding: 0 calc(var(--rythm) / 2);
       font-size: var(--medium);
     }
-
-    
 
   form {
     margin: 0 calc(-0.5 * var(--gutter));
@@ -308,15 +315,17 @@
     <h2>Shipping Address</h2>
 
     <form on:submit|preventDefault={e => {
-      checkout(e.target['email'].value, {
-        name: e.target['name'].value,
-        street1: e.target['street1'].value,
-        street2: e.target['street2'].value,
-        city: e.target['city'].value,
-        state: e.target['state'].value,
-        country: e.target['country'].value,
-        zip: e.target['zip'].value,
-      })
+      if (!waiting) {
+        checkout(e.target['email'].value, {
+          name: e.target['name'].value,
+          street1: e.target['street1'].value,
+          street2: e.target['street2'].value,
+          city: e.target['city'].value,
+          state: e.target['state'].value,
+          country: e.target['country'].value,
+          zip: e.target['zip'].value,
+        })
+      }
     }}>
       <label for="email">Email Address</label>
       <input type="email" name="email" id="email" required>
@@ -342,7 +351,7 @@
       <label for="zip">Postal Code</label>
       <input type="zip" name="zip" id="zip" required>
 
-      <button class="checkout" type="submit">Proceed to Checkout</button>
+      <button class="checkout" type="submit" disabled={waiting}>{#if waiting}One moment...{:else}Proceed to Checkout{/if}</button>
     </form>
   </div>
   {/if}

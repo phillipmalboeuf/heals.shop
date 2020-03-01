@@ -73,6 +73,10 @@
 		max-width: calc(var(--rythm) * 33);
 	}
 
+	form {
+		margin-top: calc(var(--rythm) * 2);
+	}
+
 	button[type="submit"] {
 		font-size: var(--medium);
 		padding: calc(var(--rythm) / 2) calc(var(--rythm) * 2);
@@ -84,12 +88,6 @@
 		button[type="submit"] {
 			width: 100%;
 		}
-	}
-
-	button[disabled] {
-		pointer-events: none;
-		background: var(--navy);
-		opacity: 0.33;
 	}
 
 	section > div {

@@ -170,6 +170,10 @@
     top: 1px;
   }
 
+  :global(button[disabled]) {
+		pointer-events: none;
+	}
+
   :global(button.transparent) {
     padding: 0;
     border: none;

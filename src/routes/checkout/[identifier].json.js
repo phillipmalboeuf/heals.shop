@@ -13,7 +13,7 @@ export async function get({ locale, params }, res) {
   res.end(json.encode({ checkout: {
     id: session.payment_intent.id,
     email: session.customer_email,
-    shipping: JSON.parse(session.metadata.address),
+    shipping: session.metadata.address && JSON.parse(session.metadata.address),
     note: session.metadata.note,
     items: session.display_items.map(item => ({
       total: item.amount / 100,

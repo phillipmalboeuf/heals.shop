@@ -9,7 +9,7 @@ export async function post({ body, headers }, res) {
     customer_email: body.email,
     payment_intent_data: {
       receipt_email: body.email,
-      shipping: {
+      ...body.address && { shipping: {
         name: body.address.name,
         address: {
           line1: body.address.street1,
@@ -19,7 +19,7 @@ export async function post({ body, headers }, res) {
           postal_code: body.address.zip,
           country: 'CA'
         }
-      }
+      } }
     },
     line_items: body.items.map(item => ({
       name: item.name,
@@ -31,7 +31,7 @@ export async function post({ body, headers }, res) {
     // ...body.subscription && { subscription_data: { items: [{ plan: body.subscription }] } },
     metadata: {
       note: body.note,
-      address: JSON.stringify(body.address)
+      address: body.address && JSON.stringify(body.address)
     }
   })
 

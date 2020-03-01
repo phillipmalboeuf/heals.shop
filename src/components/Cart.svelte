@@ -64,7 +64,7 @@
             name: `${item.title} – ${item.size} – ${item.color}`
           })),
           ...(donating && frequency === 'once') ? [{
-            name: 'Donation – Once',
+            name: 'Donation',
             price: donation,
             quantity: 1
           }] : []

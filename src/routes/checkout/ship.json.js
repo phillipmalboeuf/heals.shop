@@ -21,31 +21,33 @@ export async function post({ body, headers }, res) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object
 
-    const response = await fetch('https://api.goshippo.com/orders/', {
-      method: 'POST',
-      headers: {
-        'Authorization': `ShippoToken ${CONF('SHIPPO_KEY')}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        to_address: JSON.parse(session.metadata.address),
-        notes: session.metadata.note,
-        line_items: session.display_items.map(item => ({
-          quantity: item.quantity,
-          title: item.custom.name,
-          total_price: (item.amount / 100).toString(),
+    if (session.metadata.address) {
+      const response = await fetch('https://api.goshippo.com/orders/', {
+        method: 'POST',
+        headers: {
+          'Authorization': `ShippoToken ${CONF('SHIPPO_KEY')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          to_address: JSON.parse(session.metadata.address),
+          notes: session.metadata.note,
+          line_items: session.display_items.map(item => ({
+            quantity: item.quantity,
+            title: item.custom.name,
+            total_price: (item.amount / 100).toString(),
+            weight: '0.40',
+            weight_unit: 'lb'
+          })),
+          placed_at: new Date().toISOString(),
+          order_number: session.payment_intent,
+          order_status: 'PAID',
           weight: '0.40',
           weight_unit: 'lb'
-        })),
-        placed_at: new Date().toISOString(),
-        order_number: session.payment_intent,
-        order_status: 'PAID',
-        weight: '0.40',
-        weight_unit: 'lb'
+        })
       })
-    })
 
-    // console.log(await response.text())
+      // console.log(await response.text())
+    }
   }
   
   res.end(JSON.stringify({ received: true }))

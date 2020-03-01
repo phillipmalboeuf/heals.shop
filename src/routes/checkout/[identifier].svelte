@@ -90,10 +90,10 @@
         <td></td>
         <td>{checkout.total} CAD</td>
       </tr>
-      <tr>
+      {#if checkout.shipping}<tr>
         <th>Shipping Address</th>
         <td colspan="2">{Object.values(checkout.shipping).join(` `)}</td>
-      </tr>
+      </tr>{/if}
       {#if checkout.note}<tr>
         <th>Note for Victoria</th>
         <td colspan="2">{checkout.note}</td>

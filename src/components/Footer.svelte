@@ -2,6 +2,8 @@
 	import { stores } from '@sapper/app'
 	const { page, session } = stores()
 
+  import Donate from './Donate.svelte'
+
 	export let segment
 </script>
 
@@ -61,6 +63,8 @@
       background: var(--grey);
     } */
 </style>
+
+<Donate />
 
 <footer>
   <nav>

@@ -31,8 +31,8 @@
     --light: #F5F5F5;
     --taupe: #C0B2BE;
 
-    --serif: 'Untitled Serif Test', 'Times New Roman', Times, serif;
-    --sans: "Inter", system-ui, -apple-system;
+    --serif: 'Untitled Serif', 'Untitled Serif Test', 'Times New Roman', Times, serif;
+    --sans: 'Inter', system-ui, -apple-system;
   }
 
   @media all and (max-width:666px) {

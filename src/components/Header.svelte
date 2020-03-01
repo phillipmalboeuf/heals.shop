@@ -81,7 +81,7 @@
         top: 0.3vw;
         right: 0.3vw;
         background: white;
-        border-radius: 50%;
+        /* border-radius: 50%; */
         padding: 0 0.1em;
         font-weight: bold;
       }

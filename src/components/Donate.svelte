@@ -33,7 +33,7 @@
     })
 		const { session } = JSON.parse(await res.text())
 
-    const stripe = await loadStripe('pk_test_rz8eXQl5uOAVXLJrZM4oAkBb003cqy35qz')
+    const stripe = await loadStripe('pk_live_7WnlDY2Ak8qSSxZFtk52vF5O00GOfQC939')
     stripe.redirectToCheckout({
       sessionId: session.id
     })

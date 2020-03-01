@@ -3,8 +3,7 @@ import fetch from 'node-fetch'
 import stripe from '../../clients/stripe'
 import { CONF } from '../../../config/config'
 
-const endpointSecret = 'whsec_iM0qcTaSBuWPjk2pR9IhJXrJweR4A8Da'
-
+const endpointSecret = CONF('STRIPE_WEBHOOK_SECRET')
 
 export async function post({ body, headers }, res) {
   const sig = headers['stripe-signature']

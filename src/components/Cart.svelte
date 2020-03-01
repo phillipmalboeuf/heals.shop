@@ -314,6 +314,7 @@
   <div>
     <button class="transparent underline close" on:click={() => shipping = false}>Back to Cart</button>
     <h2>Shipping Address</h2>
+    <p>Shipping is free!</p>
 
     <form on:submit|preventDefault={e => {
       if (!waiting) {

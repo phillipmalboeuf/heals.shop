@@ -83,15 +83,19 @@
 		color: white;
 		background: var(--black);
 	}
+	
+	section > div {
+		margin: 0 0.5vw var(--rythm);
+	}
 
 	@media all and (max-width:666px) {
 		button[type="submit"] {
 			width: 100%;
 		}
-	}
 
-	section > div {
-		margin: 0 0.5vw var(--rythm);
+		section > div {
+			margin: 0 1.5vw var(--rythm);
+		}
 	}
 </style>
 

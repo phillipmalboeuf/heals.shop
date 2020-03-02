@@ -37,6 +37,9 @@
 
   @media all and (max-width:666px) {
     :global(:root) {
+      --rythm: 14px;
+		  --gutter: 4vw;
+
       --huge: 66px;
       --big: 28px;
       --medium: 20px;

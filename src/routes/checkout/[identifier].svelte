@@ -22,6 +22,13 @@
   onMount(()=> {
     items.set([])
     sessionStorage.clear('items')
+
+    gtag('event', 'conversion', {
+      'send_to': 'AW-780483508/JGH4CJ2bjMkBELT3lPQC',
+      'value': checkout.total,
+      'currency': 'CAD',
+      'transaction_id': checkout.id
+    });
   })
 </script>
 

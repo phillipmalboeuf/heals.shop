@@ -95,7 +95,7 @@
 
     <div>
       <div><label>Donate</label></div>
-      {#each [10, 20, 30, 40] as amount, index}
+      {#each [5, 20, 45] as amount, index}
       <div>
         <input type="radio" name="donation" value={amount} id={amount}
           checked={index === 0}>

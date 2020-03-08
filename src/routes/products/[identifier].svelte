@@ -144,7 +144,7 @@
 			<section>
 				{#each product.fields.materials as material, index}
 				<div>
-					<input type="radio" name="color" value={material} id={material} style="background-image: url({materials[material].fields.photo.fields.file.url})"
+					<input type="radio" name="color" value={material} id={material} style="background-color: {materials[material].fields.color}"
 						checked={index === 0}>
 					<label for={material}>{material}</label>
 				</div>

@@ -6,7 +6,7 @@ export async function get({ locale, params, query }, res) {
 	const [products, collection, materials] = await Promise.all([
     contentful.getEntries({ content_type: 'product', locale, select: 'sys.id,fields.title,fields.identifier,fields.description,fields.photos,fields.price,fields.comingSoon,fields.materials', 'fields.identifier': identifier }),
     query.collection && (await contentful.getEntries({ content_type: 'collection', locale, select: 'sys.id,fields.title,fields.identifier', 'fields.identifier': query.collection })).items[0],
-    contentful.getEntries({ content_type: 'material', locale, select: 'sys.id,fields.name,fields.description,fields.photo'})
+    contentful.getEntries({ content_type: 'material', locale, select: 'sys.id,fields.name,fields.description,fields.photo,fields.color'})
   ])
 
   if (products.total) {

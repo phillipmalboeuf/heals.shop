@@ -33,9 +33,6 @@
 </script>
 
 <style>
-  center {
-  }
-
   figure {
     width: 9ch;
     padding-right: var(--rythm);
@@ -50,6 +47,12 @@
     margin: calc(var(--rythm) * 3) 0;
     border-collapse: collapse;
     max-width: 42ch;
+  }
+
+  @media all and (max-width:666px) {
+    table {
+      font-size: var(--small);
+    }
   }
   
   tr {

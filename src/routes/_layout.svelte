@@ -58,6 +58,7 @@
     line-height: 1.333;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: hsla(0, 0%, 0%, 0.5);
 
 		color: var(--black);
 		background: white;

@@ -8,5 +8,9 @@
         page_path: $page.path
       })
     }
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'PageView')
+    }
   }
 </script>

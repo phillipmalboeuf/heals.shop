@@ -3,9 +3,14 @@
 
 	export async function preload({ params, query }) {
 		const res = await this.fetch('home.json')
-		const { collection, column } = json.decode(await res.text())
+		const { collection, column, materials } = json.decode(await res.text())
 
-		return { collection, column }
+		return { collection, column, materials: materials.items.reduce((_, material) => {
+			return {
+				..._,
+				[material.fields.name]: material
+			}
+		}, {}) }
 	}
 </script>
 
@@ -20,6 +25,7 @@
 
 	export let collection
 	export let column
+	export let materials
 </script>
 
 <svelte:head>
@@ -28,5 +34,5 @@
 
 <Hero title={collection.fields.title} summary={collection.fields.description} photo={collection.fields.heroPhoto} />
 
-<Collection {collection} />
+<Collection {collection} {materials} />
 <Column {column} />

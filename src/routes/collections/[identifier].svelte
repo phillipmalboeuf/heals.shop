@@ -3,10 +3,15 @@
 
 	export async function preload({ params, query }) {
 		const res = await this.fetch(`collections/${params.identifier}.json`)
-		const { collection } = json.decode(await res.text())
+		const { collection, materials } = json.decode(await res.text())
 
 		if (res.status === 200) {
-			return { collection }
+			return { collection, materials: materials.items.reduce((_, material) => {
+				return {
+					..._,
+					[material.fields.name]: material
+				}
+			}, {}) }
 		} else {
 			this.error(res.status)
 		}
@@ -18,6 +23,7 @@
 	import Document from '../../components/document/index.svelte'
 
 	export let collection
+	export let materials
 </script>
 
 <style>
@@ -33,4 +39,4 @@
 <h1>{collection.fields.title}</h1>
 <summary><Document body={collection.fields.description} /></summary>
 
-<Collection {collection} />
+<Collection {collection} {materials} />

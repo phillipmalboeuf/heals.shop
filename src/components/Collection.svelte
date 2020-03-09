@@ -1,6 +1,7 @@
 <script>
   import Picture from './Picture.svelte'
   export let collection
+  export let materials
 </script>
 
 <style>
@@ -40,22 +41,49 @@
     a:hover figure > :global(picture + picture) {
       opacity: 1;
     }
+
+    figcaption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+      figcaption span {
+        display: inline-block;
+        width: calc(var(--rythm) * 1.42);
+        height: calc(var(--rythm) * 1.42);
+        border-radius: 50%;
+        margin: 0 calc(var(--rythm) / 4);
+        background-size: cover;
+        background-position: center;
+      }
 </style>
 
 <ol>
   {#each collection.fields.products as product}
   <li>
     <a rel=prefetch href="products/{product.fields.identifier}?collection={collection.fields.identifier}">
-      {#if product.fields.photos.length > 1}
       <figure>
+        {#if product.fields.photos.length > 1}
         <Picture media={product.fields.photos[0]} />
-        <Picture media={product.fields.photos[1]} />
+        <Picture media={product.fields.photos[1]} />  
+        {:else}
+        <Picture media={product.fields.photos[0]} />
+        {/if}
+
+        <figcaption>
+          <div>
+            <h3>{product.fields.title}</h3>
+            <h6>{#if product.fields.comingSoon}Coming Soon{:else}{product.fields.price} CAD{/if}</h6>
+          </div>
+          <div>
+            {#each product.fields.materials as material, index}
+            <span style="background-color: {materials[material].fields.color}"></span>
+            {/each}
+          </div>
+        </figcaption>
       </figure>
-      {:else}
-      <figure><Picture media={product.fields.photos[0]} /></figure>
-      {/if}
-      <h3>{product.fields.title}</h3>
-      <h6>{#if product.fields.comingSoon}Coming Soon{:else}{product.fields.price} CAD{/if}</h6>
+      
     </a>
   </li>
   {/each}

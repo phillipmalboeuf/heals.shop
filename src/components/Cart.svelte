@@ -266,7 +266,7 @@
             <small>{item.color}, Size {item.size}</small>
           </summary>
           <h2>{item.price} CAD</h2>
-          <button class="transparent" on:click={() => removeFromCart(index)}>✕</button>
+          <button class="transparent" type="button" on:click={() => removeFromCart(index)}>✕</button>
         </li>
       {/each}
       </ol>

@@ -21,7 +21,7 @@
     "contentful": "^7.9.1",
     "json-complete": "^2.0.0",
     "nconf": "^0.10.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "polka": "next",
     "sirv": "",
     "stripe": "^7.9.0"
